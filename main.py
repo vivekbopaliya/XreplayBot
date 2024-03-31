@@ -140,12 +140,12 @@ class TwitterBot:
                                                    tweet_fields=['created_at', 'conversation_id']).data
 
     # Checking to see if we've already responded to a mention with what's logged in airtable
-    def check_already_responded(self, mentioned_conversation_tweet_id):
-        records = self.airtable.get_all(view='Grid view')
-        for record in records:
-            if record['fields'].get('mentioned_conversation_tweet_id') == str(mentioned_conversation_tweet_id):
-                return True
-        return False
+    # def check_already_responded(self, mentioned_conversation_tweet_id):
+    #     records = self.airtable.get_all(view='Grid view')
+    #     for record in records:
+    #         if record['fields'].get('mentioned_conversation_tweet_id') == str(mentioned_conversation_tweet_id):
+    #             return True
+    #     return False
 
     # Run through all mentioned tweets and generate a response
     def respond_to_mentions(self):
@@ -164,10 +164,10 @@ class TwitterBot:
                 mention)
 
             # If the mention *is* the conversation or you've already responded, skip it and don't respond
-            if (mentioned_conversation_tweet.id != mention.id
-                    and not self.check_already_responded(mentioned_conversation_tweet.id)):
+            # if (mentioned_conversation_tweet.id != mention.id
+            #         and not self.check_already_responded(mentioned_conversation_tweet.id)):
 
-                self.respond_to_mention(mention, mentioned_conversation_tweet)
+            self.respond_to_mention(mention, mentioned_conversation_tweet)
         return True
 
         # The main entry point for the bot with some logging
